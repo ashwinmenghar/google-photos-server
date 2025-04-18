@@ -1,7 +1,6 @@
 import { sql } from "drizzle-orm";
 import { uuid } from "drizzle-orm/gel-core";
 import { date, timestamp } from "drizzle-orm/mysql-core";
-// import { pgTable } from "drizzle-orm/pg-core";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import * as p from "drizzle-orm/pg-core";
 
@@ -14,7 +13,9 @@ export const users = p.pgTable("users", {
   // auth_provider: text("auth_provider"),
   // profile_photo: text("profile_photo"),
 
-  id: p.serial(),
+  // id: p.serial(),
+  // id: uuid("id").defaultRandom().primaryKey().notNull(),
+  id: uuid("id").default(sql`gen_random_uuid()`),
   firstName: p.text("first-name"),
   lastName: p.text("LastName"),
   email: p.text(),

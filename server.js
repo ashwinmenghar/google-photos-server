@@ -6,13 +6,14 @@ dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
 app.post("/", async (req, res) => {
-  const { name, email } = req.body;
-  const data = await create({ name, email });
+  const data = await create(req.body);
   res.status(200).send(data);
 });
 
